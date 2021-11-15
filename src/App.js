@@ -1,5 +1,6 @@
 import React from 'react';
 import Logo from './images/logo.png'
+import Post from './components/Post';
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <img className="app__headerImage" src={Logo} alt=""></img>
       </div>
       <h1> HELLO</h1>
+      <Post />
       {/* Posts */}
       {/* Posts */}
     </div>
