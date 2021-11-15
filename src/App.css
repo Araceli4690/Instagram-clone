@@ -2,10 +2,16 @@
   margin: 0;
 }
 
-.app{
+.App{
   background-color: #fafafa;
+  height: 100vh;
 }
 .app__headerImage{
-  background-color: white;
+  padding: 20px;
   object-fit: contain;
+}
+
+.app__header{
+  border-bottom: 1px solid lightgray;
+  background-color: white;
 }
