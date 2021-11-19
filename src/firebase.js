@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat';
 
+
 const firebaseApp = firebase.initializeApp({
     apiKey: "AIzaSyBFb1mahx7BreJmFQmszSRIrn0WBXf10UM",
     authDomain: "insta-clone-7318b.firebaseapp.com",

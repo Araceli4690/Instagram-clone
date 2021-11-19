@@ -23,4 +23,4 @@ function Post({ username, caption, imageUrl }) {
 export default Post
 
 
-{/*Left off on 41:39 */ }
+{/*Left off on 1:08 access db, auth, storage */ }
