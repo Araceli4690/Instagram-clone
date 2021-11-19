@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Logo from './images/logo.png'
 import Post from './components/Post';
-import { db } from './firebase';
+import { auth, db } from './firebase';
 import './App.css';
 import { ClassNames } from '@emotion/react';
 import Modal from '@mui/material/Modal';
@@ -45,7 +45,11 @@ function App() {
   }, []);
   //signup function
   const signUp = (event) => {
-
+    event.preventDefault();
+    //create user
+    auth.createUserWithEmailAndPassword(email, password)
+      //if any error occurs alert sent
+      .catch((error) => alert(error.message))
   }
 
   return (
@@ -82,7 +86,8 @@ function App() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}>
               </Input>
-              <Button onClick={signUp}>Sign Up</Button>
+              <Button type="submit"
+                onClick={signUp}>Sign Up</Button>
             </form>
           </Box>
         </Modal>
