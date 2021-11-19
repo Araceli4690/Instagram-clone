@@ -11,7 +11,12 @@ function App() {
     //this is where code runs
     //onSnapshot runs code everytime a change happens
     db.collection('posts').onSnapshot(snapshot => {
-      setPosts(snapshot.docs.map(doc => doc.data()))
+      setPosts(snapshot.docs.map(doc => ({
+        //doc.id get individual doc data
+        id: doc.id,
+        //posting doc data
+        post: doc.data()
+      })))
     })
   }, []);
   return (
@@ -21,8 +26,9 @@ function App() {
         <img className="app__headerImage" src={Logo} alt=""></img>
       </div>
       <h1> HELLO</h1>
-      {posts.map(post => [
-        <Post username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+      {posts.map(id, post => [
+        //key lets react know to just update new post and not refresh old ones
+        <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
       ])}
 
       {/* Posts */}
