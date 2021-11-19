@@ -30,6 +30,36 @@ function App() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    //listens for any time any authentication change happens
+    const unsubscribed = auth.onAuthStateChanged((authUser) => {
+      //if user has logged in
+      if (authUser) {
+        console.log(authUser);
+        //capture user inside state, keeps user logged in
+        setUser(authUser);
+        if (authUser.displayName) {
+          //dont update username
+        } else {
+          //if new user was just create
+          return authUser.updateProfile({
+            displayName: username,
+          });
+        }
+      } else {
+        // if user has logged out
+        setUser(null);
+      }
+    })
+    return () => {
+      //perform some cleanup actions
+      unsubscribed();
+    }
+  }, [user, username]);
+
+
   //useEffect runs piece of code based on a specific condition
   useEffect(() => {
     //this is where code runs
