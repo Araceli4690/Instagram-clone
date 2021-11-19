@@ -7,6 +7,7 @@ import { ClassNames } from '@emotion/react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Input from '@mui/material/Input';
 import Typography from '@mui/material/Typography';
 
 
@@ -26,6 +27,9 @@ function App() {
   const [posts, setPosts] = useState([]);
   //create state for modal
   const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   //useEffect runs piece of code based on a specific condition
   useEffect(() => {
     //this is where code runs
@@ -40,27 +44,48 @@ function App() {
     })
   }, []);
   //signup function
+  const signUp = (event) => {
+
+  }
 
   return (
     <div className="App">
-      <Button onClick={() => setOpen(true)}>Sign Up</Button>
-      <Modal
-        open={open}
-        //setting state of modal to false to close it
-        onClose={() => setOpen(false)}
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
       {/* Header */}
       <div className="app__header">
         <img className="app__headerImage" src={Logo} alt=""></img>
+        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        <Modal
+          open={open}
+          //setting state of modal to false to close it
+          onClose={() => setOpen(false)}
+        >
+          <Box sx={style}>
+            <form className="app__signup">
+              <center>
+                <img className="app__headerImage" src={Logo} alt=""></img>
+              </center>
+              <Input
+                placeholder="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}>
+              </Input>
+              <Input
+                placeholder="email"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}>
+              </Input>
+              <Input
+                placeholder="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}>
+              </Input>
+              <Button onClick={signUp}>Sign Up</Button>
+            </form>
+          </Box>
+        </Modal>
       </div>
       <h1> HELLO</h1>
       {posts.map(({ id, post }) => (
