@@ -27,6 +27,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   //create state for modal
   const [open, setOpen] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -79,6 +80,10 @@ function App() {
       //if any error occurs alert sent
       .catch((error) => alert(error.message))
   }
+  const signIn = ((event) => {
+    event.preventDefault();
+
+  })
 
   return (
     <div className="App">
@@ -120,10 +125,42 @@ function App() {
             </form>
           </Box>
         </Modal>
+
+        <Modal
+          open={openSignIn}
+          //setting state of modal to false to close it
+          onClose={() => setOpenSignIn(false)}
+        >
+          <Box sx={style}>
+            <form className="app__signup">
+              <center>
+                <img className="app__headerImage" src={Logo} alt=""></img>
+              </center>
+              <Input
+                placeholder="email"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}>
+              </Input>
+              <Input
+                placeholder="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}>
+              </Input>
+              <Button type="submit"
+                onClick={signIn}>Login
+              </Button>
+            </form>
+          </Box>
+        </Modal>
         {user ? (
           <Button onClick={() => auth.signOut()}>Logout</Button>
         ) : (
-          <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          <div className="app_loginContainer">
+            <Button onClick={() => setOpenSignIn(true)}>Login</Button>
+            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
         )}
 
       </div>
