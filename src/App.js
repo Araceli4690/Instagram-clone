@@ -79,10 +79,16 @@ function App() {
       })
       //if any error occurs alert sent
       .catch((error) => alert(error.message))
+    //modal closes after singup
+    setOpen(false);
   }
   const signIn = ((event) => {
     event.preventDefault();
+    auth.signInWithEmailAndPassword(email, password)
+      .catch((error) => alert(error.message))
 
+    //modal closes after login
+    setOpenSignIn(false);
   })
 
   return (
@@ -90,80 +96,78 @@ function App() {
       {/* Header */}
       <div className="app__header">
         <img className="app__headerImage" src={Logo} alt=""></img>
-
-        <Modal
-          open={open}
-          //setting state of modal to false to close it
-          onClose={() => setOpen(false)}
-        >
-          <Box sx={style}>
-            <form className="app__signup">
-              <center>
-                <img className="app__headerImage" src={Logo} alt=""></img>
-              </center>
-              <Input
-                placeholder="username"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}>
-              </Input>
-              <Input
-                placeholder="email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}>
-              </Input>
-              <Input
-                placeholder="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}>
-              </Input>
-              <Button type="submit"
-                onClick={signUp}>Sign Up
-              </Button>
-            </form>
-          </Box>
-        </Modal>
-
-        <Modal
-          open={openSignIn}
-          //setting state of modal to false to close it
-          onClose={() => setOpenSignIn(false)}
-        >
-          <Box sx={style}>
-            <form className="app__signup">
-              <center>
-                <img className="app__headerImage" src={Logo} alt=""></img>
-              </center>
-              <Input
-                placeholder="email"
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}>
-              </Input>
-              <Input
-                placeholder="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}>
-              </Input>
-              <Button type="submit"
-                onClick={signIn}>Login
-              </Button>
-            </form>
-          </Box>
-        </Modal>
-        {user ? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
-        ) : (
-          <div className="app_loginContainer">
-            <Button onClick={() => setOpenSignIn(true)}>Login</Button>
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
-          </div>
-        )}
-
       </div>
+      <Modal
+        open={open}
+        //setting state of modal to false to close it
+        onClose={() => setOpen(false)}
+      >
+        <Box sx={style}>
+          <form className="app__signup">
+            <center>
+              <img className="app__headerImage" src={Logo} alt=""></img>
+            </center>
+            <Input
+              placeholder="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}>
+            </Input>
+            <Input
+              placeholder="email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}>
+            </Input>
+            <Input
+              placeholder="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}>
+            </Input>
+            <Button type="submit"
+              onClick={signUp}>Sign Up
+            </Button>
+          </form>
+        </Box>
+      </Modal>
+
+      <Modal
+        open={openSignIn}
+        //setting state of modal to false to close it
+        onClose={() => setOpenSignIn(false)}
+      >
+        <Box sx={style}>
+          <form className="app__signup">
+            <center>
+              <img className="app__headerImage" src={Logo} alt=""></img>
+            </center>
+            <Input
+              placeholder="email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}>
+            </Input>
+            <Input
+              placeholder="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}>
+            </Input>
+            <Button type="submit"
+              onClick={signIn}>Login
+            </Button>
+          </form>
+        </Box>
+      </Modal>
+      {user ? (
+        <Button onClick={() => auth.signOut()}>Logout</Button>
+      ) : (
+        <div className="app_loginContainer">
+          <Button onClick={() => setOpenSignIn(true)}>Login</Button>
+          <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        </div>
+      )}
       <h1> HELLO</h1>
       {posts.map(({ id, post }) => (
         //key lets react know to just update new post and not refresh old ones
