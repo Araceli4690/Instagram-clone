@@ -3,9 +3,12 @@ import Logo from './images/logo.png'
 import Post from './components/Post';
 import { db } from './firebase';
 import './App.css';
+import { ClassNames } from '@emotion/react';
 
 function App() {
   const [posts, setPosts] = useState([]);
+  //create state for modal
+  const [open, setOpen] = useState(false);
   //useEffect runs piece of code based on a specific condition
   useEffect(() => {
     //this is where code runs
@@ -21,6 +24,14 @@ function App() {
   }, []);
   return (
     <div className="App">
+      <Modal
+        open={open}
+        onClose={handleClose}
+      >
+        <div style={modalStyle} className={ClassNames.paper}>
+          <h2>Modal</h2>
+        </div>
+      </Modal>
       {/* Header */}
       <div className="app__header">
         <img className="app__headerImage" src={Logo} alt=""></img>
