@@ -34,20 +34,13 @@ function App() {
 
   useEffect(() => {
     //listens for any time any authentication change happens
-    const unsubscribed = auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       //if user has logged in
       if (authUser) {
         console.log(authUser);
         //capture user inside state, keeps user logged in
         setUser(authUser);
-        if (authUser.displayName) {
-          //dont update username
-        } else {
-          //if new user was just create
-          return authUser.updateProfile({
-            displayName: username,
-          });
-        }
+
       } else {
         // if user has logged out
         setUser(null);
@@ -55,7 +48,7 @@ function App() {
     })
     return () => {
       //perform some cleanup actions
-      unsubscribed();
+      unsubscribe();
     }
   }, [user, username]);
 
@@ -78,6 +71,11 @@ function App() {
     event.preventDefault();
     //create user
     auth.createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        return authUser.user.updateProfile({
+          displayName: username
+        })
+      })
       //if any error occurs alert sent
       .catch((error) => alert(error.message))
   }
@@ -87,7 +85,7 @@ function App() {
       {/* Header */}
       <div className="app__header">
         <img className="app__headerImage" src={Logo} alt=""></img>
-        <Button onClick={() => setOpen(true)}>Sign Up</Button>
+
         <Modal
           open={open}
           //setting state of modal to false to close it
@@ -117,10 +115,17 @@ function App() {
                 onChange={(e) => setPassword(e.target.value)}>
               </Input>
               <Button type="submit"
-                onClick={signUp}>Sign Up</Button>
+                onClick={signUp}>Sign Up
+              </Button>
             </form>
           </Box>
         </Modal>
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+        ) : (
+          <Button onClick={() => setOpen(true)}>Sign Up</Button>
+        )}
+
       </div>
       <h1> HELLO</h1>
       {posts.map(({ id, post }) => (
