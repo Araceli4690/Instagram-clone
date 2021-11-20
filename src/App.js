@@ -95,7 +95,7 @@ function App() {
 
   return (
     <div className="App">
-      <ImageUpload />
+      <ImageUpload username={user.displayName} />
       {/* Header */}
       <div className="app__header">
         <img className="app__headerImage" src={Logo} alt=""></img>

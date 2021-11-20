@@ -2,7 +2,7 @@ import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import { storage, db } from '../../firebase.js'
 
-function ImageUpload() {
+function ImageUpload(props) {
     const [caption, setCaption] = useState('');
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
@@ -22,6 +22,28 @@ function ImageUpload() {
                 const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                 //set progress from 0-100
                 setProgress(progress);
+            },
+            (error) => {
+                //Error function
+                console.log(error);
+            },
+            () => {
+                //onComplete function
+                storage
+                    .ref("images")
+                    .child(image.name)
+                    //get dowload link after being uploaded
+                    .getDownloadURL()
+                    .then(url => {
+                        //post image inside db
+                        db.collection("posts").add({
+                            //timestamp sllows us to sort post according to timing
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            caption: caption,
+                            imageUrl: url,
+                            username: username
+                        })
+                    })
             }
         )
     }
