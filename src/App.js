@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Logo from './images/logo.png'
 import Post from './components/Post';
+import ImageUpload from './components/ImageUpload';
 import { auth, db } from './firebase';
 import './App.css';
 import { ClassNames } from '@emotion/react';
@@ -9,6 +10,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
 import Typography from '@mui/material/Typography';
+import ImageUpload from './components/ImageUpload';
 
 
 const style = {
@@ -93,6 +95,7 @@ function App() {
 
   return (
     <div className="App">
+      <ImageUpload />
       {/* Header */}
       <div className="app__header">
         <img className="app__headerImage" src={Logo} alt=""></img>
