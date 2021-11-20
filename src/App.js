@@ -60,7 +60,7 @@ function App() {
   useEffect(() => {
     //this is where code runs
     //onSnapshot runs code everytime a change happens
-    db.collection('posts').onSnapshot(snapshot => {
+    db.collection('posts').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
       setPosts(snapshot.docs.map(doc => ({
         //doc.id get individual doc data
         id: doc.id,
@@ -95,11 +95,7 @@ function App() {
 
   return (
     <div className="App">
-      {user?.displayName ? (
-        <ImageUpload username={user.displayName} />
-      ) : (
-        <h3>Login to upload</h3>
-      )}
+
 
       {/* Header */}
       <div className="app__header">
@@ -182,8 +178,11 @@ function App() {
         <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
       ))}
 
-      {/* Posts */}
-      {/* Posts */}
+      {user?.displayName ? (
+        <ImageUpload username={user.displayName} />
+      ) : (
+        <h3>Login to upload</h3>
+      )}
     </div>
 
   );
