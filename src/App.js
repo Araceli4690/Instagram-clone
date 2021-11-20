@@ -4,13 +4,10 @@ import Post from './components/Post';
 import ImageUpload from './components/ImageUpload';
 import { auth, db } from './firebase';
 import './App.css';
-import { ClassNames } from '@emotion/react';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Input from '@mui/material/Input';
-import Typography from '@mui/material/Typography';
-
 
 
 const style = {
@@ -171,11 +168,14 @@ function App() {
         </Box>
       </Modal>
 
-      <h1> HELLO</h1>
-      {posts.map(({ id, post }) => (
-        //key lets react know to just update new post and not refresh old ones
-        <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
-      ))}
+      <div className="app__posts">
+        {posts.map(({ id, post }) => (
+          //key lets react know to just update new post and not refresh old ones
+          <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+        ))}
+
+      </div>
+
 
       {user?.displayName ? (
         <ImageUpload username={user.displayName} />

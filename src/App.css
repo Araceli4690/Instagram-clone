@@ -7,6 +7,11 @@
 
 }
 
+.app__posts{
+  padding: 20px;
+  justify-content: center;
+}
+
 .app__header{
   border-bottom: 1px solid lightgray;
   background-color: white;
