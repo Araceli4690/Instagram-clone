@@ -12,8 +12,12 @@
   background-color: white;
   padding: 20px;
   object-fit: contain;
+  display: flex;
+  justify-content: space-between;
 }
-
+.app__headerImage{
+  object-fit: contain;
+}
 .app__signup{
   display: flex;
   flex-direction: column;

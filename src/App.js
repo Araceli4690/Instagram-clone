@@ -95,11 +95,17 @@ function App() {
 
   return (
     <div className="App">
-
-
       {/* Header */}
       <div className="app__header">
         <img className="app__headerImage" src={Logo} alt=""></img>
+        {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+        ) : (
+          <div className="app_loginContainer">
+            <Button onClick={() => setOpenSignIn(true)}>Login</Button>
+            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
+        )}
       </div>
       <Modal
         open={open}
@@ -164,14 +170,7 @@ function App() {
           </form>
         </Box>
       </Modal>
-      {user ? (
-        <Button onClick={() => auth.signOut()}>Logout</Button>
-      ) : (
-        <div className="app_loginContainer">
-          <Button onClick={() => setOpenSignIn(true)}>Login</Button>
-          <Button onClick={() => setOpen(true)}>Sign Up</Button>
-        </div>
-      )}
+
       <h1> HELLO</h1>
       {posts.map(({ id, post }) => (
         //key lets react know to just update new post and not refresh old ones
