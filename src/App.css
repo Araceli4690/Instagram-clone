@@ -4,12 +4,12 @@
 
 .App{
   background-color: #fafafa;
-
 }
 
 .app__posts{
-  padding: 20px;
-  justify-content: center;
+  margin: auto;
+  width: 40%;
+  padding: 10px;
 }
 
 .app__header{
@@ -26,4 +26,18 @@
 .app__signup{
   display: flex;
   flex-direction: column;
+}
+@media screen and (max-width: 809px) {
+  .app__posts{
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+  }
+  }
+@media screen and (max-width: 575px) {
+.app__posts{
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+}
 }
