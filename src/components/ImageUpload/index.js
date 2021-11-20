@@ -1,8 +1,9 @@
 import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import { storage, db } from '../../firebase.js'
+import firebase from 'firebase/compat';
 
-function ImageUpload(props) {
+function ImageUpload({ username }) {
     const [caption, setCaption] = useState('');
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
@@ -42,7 +43,11 @@ function ImageUpload(props) {
                             caption: caption,
                             imageUrl: url,
                             username: username
-                        })
+                        });
+                        //set input back to empty
+                        setProgress(0);
+                        setCaption("");
+                        setImage(null);
                     })
             }
         )
@@ -50,7 +55,7 @@ function ImageUpload(props) {
 
     return (
         <div>
-            <h1>abc</h1>
+            <progress value={progress} max="100" />
             {/*caption input */}
             <input type="text" placeholder="Enter a caption" onChange={event => setCaption(event.target.value)} value={caption} />
             {/* file picker*/}
