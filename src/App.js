@@ -171,7 +171,7 @@ function App() {
       <div className="app__posts">
         {posts.map(({ id, post }) => (
           //key lets react know to just update new post and not refresh old ones
-          <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
+          <Post key={id} postId={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
         ))}
 
         {user?.displayName ? (
@@ -183,7 +183,7 @@ function App() {
 
 
 
-    </div>
+    </div >
 
   );
 }

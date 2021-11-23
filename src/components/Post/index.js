@@ -1,8 +1,29 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import './style.css'
 import Avatar from '@mui/material/Avatar'
+import { db } from '../../firebase';
 
-function Post({ username, caption, imageUrl }) {
+function Post({ postId, username, caption, imageUrl }) {
+    //retirving comments form individual posts
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        let unsubscribe;
+        if (postId) {
+            unsubscribe = db
+                .collection("posts")
+                .doc(postId)
+                .collection("comments")
+                .onSnapshot((snapshot) => {
+                    setComments(snapshot.docs.map((doc) => doc.data()));
+                })
+        }
+        return () => {
+            unsubscribe();
+        }
+        //include variable as dependency
+    }, [postId])
+
     return (
         <div className="post">
             <div className="post__header">
@@ -23,4 +44,3 @@ function Post({ username, caption, imageUrl }) {
 export default Post
 
 
-{/*Left off on 1:08 access db, auth, storage */ }
