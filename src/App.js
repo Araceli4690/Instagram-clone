@@ -31,6 +31,7 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
+  //const [avatar, setAvatar] = useState('');
 
   useEffect(() => {
     //listens for any time any authentication change happens
@@ -74,6 +75,7 @@ function App() {
       .then((authUser) => {
         return authUser.user.updateProfile({
           displayName: username
+          //profile: avatar
         })
       })
       //if any error occurs alert sent
@@ -132,6 +134,7 @@ function App() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}>
             </Input>
+            {/** onChange set avatar */}
             <Button type="submit"
               onClick={signUp}>Sign Up
             </Button>
@@ -171,10 +174,12 @@ function App() {
       <div className="app__posts">
         {posts.map(({ id, post }) => (
           //key lets react know to just update new post and not refresh old ones
+          //avatar={post.avatar}
           <Post key={id} postId={id} user={user} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
         ))}
 
         {user?.displayName ? (
+          //avatar={user.profile}
           <ImageUpload username={user.displayName} />
         ) : (
           <h3>Login to upload</h3>
