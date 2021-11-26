@@ -98,11 +98,11 @@ function App() {
       <div className="app__header">
         <img className="app__headerImage" src={Logo} alt=""></img>
         {user ? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
+          <Button style={{ color: "black" }} onClick={() => auth.signOut()}>Logout</Button>
         ) : (
-          <div className="app_loginContainer">
-            <Button onClick={() => setOpenSignIn(true)}>Login</Button>
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          <div className="app__loginContainer">
+            <Button style={{ color: "black" }} onClick={() => setOpenSignIn(true)}>Login</Button>
+            <Button style={{ color: "black" }} onClick={() => setOpen(true)}>Sign Up</Button>
           </div>
         )}
       </div>
@@ -135,7 +135,7 @@ function App() {
               onChange={(e) => setPassword(e.target.value)}>
             </Input>
             {/** onChange set avatar */}
-            <Button type="submit"
+            <Button style={{ color: "black" }} type="submit"
               onClick={signUp}>Sign Up
             </Button>
           </form>
@@ -164,7 +164,7 @@ function App() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}>
             </Input>
-            <Button type="submit"
+            <Button style={{ color: "black" }} type="submit"
               onClick={signIn}>Login
             </Button>
           </form>
